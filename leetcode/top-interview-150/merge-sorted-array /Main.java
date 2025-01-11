@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String args[]){
@@ -28,6 +29,76 @@ public class Main {
         Arrays.stream(nums2).forEach(n -> System.out.printf("%d|", n));
 
         // Algorithm
+        int i = 0;  int countn1 = 0; int countn2 = 0;
+
+        while(nums1.length > i){
+            if(nums1[i] == 0){countn1++;}
+            i++;
+        }
+
+        i=0;
+        while(nums2.length > i){
+            if(nums2[i] == 0){countn2++;}
+            i++;
+        }
+
+        int size = (nums1.length-countn1)+(nums2.length-countn2);
+        int mergerArrays[] = new int[size];
+
+        i = 0;
+
+        while(nums1.length > i){
+            if(nums1[i] > 0){
+                mergerArrays[i] = nums1[i];
+            }
+            i++;
+        }
+
+        int j = 0;
+
+        while(nums2.length > j){
+            if(nums2[j] > 0){
+                mergerArrays[i+j] = nums2[i];
+            }
+            j++;
+        }
+
+        System.out.printf("\n-------------");
+
+        for(int k = 0; k < mergerArrays.length; k++){
+            System.out.printf("\n | %d", mergerArrays[k]);
+        }
+
+
+
+
+        for (int x = 0; x < mergerArrays.length; x++) {
+            boolean swapped = false;
+            for (int z = 0; z < mergerArrays.length - x - 1; z++) {
+                if (mergerArrays[z] > mergerArrays[z + 1]) {
+
+                    int aux = mergerArrays[z];
+                    mergerArrays[z] = mergerArrays[z + 1];
+                    mergerArrays[z + 1] = aux;
+                    swapped = true;
+                }
+            }
+
+            if (!swapped) {
+                break;
+            }
+        }
+
+        System.out.printf("\n-------------");
+
+        for(int k = 0; k < mergerArrays.length; k++){
+            System.out.printf("\n | %d", mergerArrays[k]);
+        }
+
+
+
 
     }
+
+
 }
